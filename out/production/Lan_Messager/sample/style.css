@@ -1,0 +1,26 @@
+.bg{
+
+    -fx-background-color:linear-gradient(to top, rgb(40, 145, 146), rgb(51, 139, 147));;
+}
+
+.textfield{
+
+    -fx-background-radius: 0 30 30 0;
+    -fx-background-color:white;
+
+}
+
+.btn{
+    -fx-background-color:linear-gradient(to right, rgb(70, 185, 146), rgb(51, 160, 147));
+    -fx-background-radius: 30 0 0 30;
+    -fx-padding:0 0 0 20;
+
+}
+.btn:pressed{
+    -fx-background-color:rgba(255, 255, 255,0.2);
+}
+
+.img{
+-fx-background-radius: 30 30 30 30;
+
+}
