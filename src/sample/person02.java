@@ -9,11 +9,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
@@ -28,7 +32,7 @@ public class person02 extends Application {
     public static final TextArea showMessage=new TextArea();
     public static final TextField inputMsg=new TextField();
     public static final Button sendBtn=new Button();
-    private static final ImageView image = new ImageView();
+    private static final Circle image=new Circle();
     private static final Label Name = new Label();
     private static Socket socket=new Socket();
     private static Font font=new Font("Roboto",15);
@@ -47,17 +51,18 @@ public class person02 extends Application {
 
 
     private static void networkConnection() throws IOException {
-        System.out.println("Sending Request to Server");
+        System.out.println("Sending Request to Person 01");
         socket=new Socket("127.0.0.1",7777);
         System.out.println("Connection Done..");
 
         br=new BufferedReader(new InputStreamReader(socket.getInputStream()));
         out=new PrintWriter(socket.getOutputStream());
 
-       // createGUI();
+
         handleEvents();
         startReading();
         startWriting();
+
 
 
 
@@ -67,7 +72,7 @@ public class person02 extends Application {
 
         inputMsg.setOnAction(event -> {
             String msg = inputMsg.getText();
-            showMessage.appendText("\t\t\t\t\t\t\t\t\t\t\t\t\t"+msg + "\n");
+            showMessage.appendText("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"+msg + "\n");
             out.println(msg);
             out.flush();
             inputMsg.setText("");
@@ -76,7 +81,7 @@ public class person02 extends Application {
 
         sendBtn.setOnAction(event -> {
             String msg = inputMsg.getText();
-            showMessage.appendText("\t\t\t\t\t\t\t\t\t\t\t\t\t"+msg + "\n");
+            showMessage.appendText("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"+msg + "\n");
             out.println(msg);
             out.flush();
             inputMsg.setText("");
@@ -142,13 +147,18 @@ public class person02 extends Application {
         topBar.setAlignment(Pos.CENTER_LEFT);
         topBar.paddingProperty().set(new Insets(5,10,5,20));
 
+        image.setSmooth(true);
+        image.setFill(Color.WHITE);
+        image.setRadius(26.6);
+
+
         showMessage.setPrefHeight(490);
         showMessage.setFont(font);
         showMessage.setEditable(false);
 
 
         Name.setText("Partner");
-        Name.setFont(Font.font("AGENCY FB",20));
+        Name.setFont(Font.font("OPEN SANS", FontWeight.BOLD,20));
         Name.setTextFill(Paint.valueOf("WHITE"));
         Name.alignmentProperty().set(Pos.CENTER_LEFT);
 
@@ -175,7 +185,7 @@ public class person02 extends Application {
         VBox root=new VBox(0,topBar,showMessage,bottomBar);
 
 
-        root.setPrefSize(600,600);
+        root.setPrefSize(700,600);
         return root;
     }
 

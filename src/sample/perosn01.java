@@ -12,14 +12,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -39,8 +43,8 @@ public class perosn01 extends Application {
     public static final TextArea showMessage = new TextArea();
     public static final TextField inputMsg = new TextField();
     public static final Button sendBtn = new Button();
-    private static final ImageView image = new ImageView();
     private static final Label Name = new Label();
+    private static final Circle image=new Circle();
     private static Socket socket = new Socket();
     private static Font font = new Font("Roboto", 15);
     private static BufferedReader br;
@@ -58,14 +62,14 @@ public class perosn01 extends Application {
     private static void networkConnection() throws IOException {
 
         ServerSocket serverSocket = new ServerSocket(7777);
-        System.out.println("Server is ready to Accept Connection");
+        System.out.println("Ready to Accepting Connection");
         System.out.println("Waiting...");
         socket = serverSocket.accept();
 
         br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         out = new PrintWriter(socket.getOutputStream());
 
-        // createGUI();
+
         handleEvents();
         startReading();
        // startWriting();
@@ -77,7 +81,7 @@ public class perosn01 extends Application {
 
         inputMsg.setOnAction(event -> {
             String msg = inputMsg.getText();
-            showMessage.appendText("\t\t\t\t\t\t\t\t\t\t\t\t\t" + msg + "\n");
+            showMessage.appendText("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + msg + "\n");
             out.println(msg);
             out.flush();
             inputMsg.setText("");
@@ -86,7 +90,7 @@ public class perosn01 extends Application {
 
         sendBtn.setOnAction(event -> {
             String msg = inputMsg.getText();
-            showMessage.appendText("\t\t\t\t\t\t\t\t\t\t\t\t\t" + msg + "\n");
+            showMessage.appendText("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + msg + "\n");
             out.println(msg);
             out.flush();
             inputMsg.setText("");
@@ -153,13 +157,18 @@ public class perosn01 extends Application {
         topBar.setAlignment(Pos.CENTER_LEFT);
         topBar.paddingProperty().set(new Insets(5,10,5,20));
 
+
+        image.setSmooth(true);
+        image.setFill(Color.WHITE);
+        image.setRadius(26.6);
+
         showMessage.setPrefHeight(490);
         showMessage.setFont(font);
         showMessage.setEditable(false);
 
 
         Name.setText("Tareq Adnan");
-        Name.setFont(Font.font("AGENCY FB",20));
+        Name.setFont(Font.font("OPEN SANS",FontWeight.BOLD,20));
         Name.setTextFill(Paint.valueOf("WHITE"));
         Name.alignmentProperty().set(Pos.CENTER_LEFT);
 
@@ -185,7 +194,7 @@ public class perosn01 extends Application {
 
         VBox root=new VBox(0,topBar,showMessage,bottomBar);
 
-        root.setPrefSize(600,600);
+        root.setPrefSize(700,600);
         return root;
     }
 
